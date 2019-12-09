@@ -1,5 +1,5 @@
-import test from "ava";
-import { runProgram } from "./runProgram";
+const test = require("ava");
+const { runProgram } = require("./runProgram");
 
 test("1,9,10,3,2,3,11,0,99,30,40,50", t => {
   t.is(

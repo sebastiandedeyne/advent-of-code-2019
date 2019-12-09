@@ -1,21 +1,12 @@
-const { createReadStream } = require("fs");
-const { createInterface } = require("readline");
-const {
-  calculateRequiredFuel,
-  calculateRequiredFuelRecursive
-} = require("./calculateRequiredFuel");
+const { readFile } = require("fs");
+const { fuelForMasses, fuelForMassesRecursive } = require("./fuel");
 
-let requiredFuel = 0;
-let requiredFuelRecursive = 0;
+readFile(`${__dirname}/input.txt`, "utf-8", (_err, input) => {
+  console.log(`Required fuel: ${fuelForMasses(input.trim().split("\n"))}`);
 
-createInterface({
-  input: createReadStream(`${__dirname}/input.txt`)
-})
-  .on("line", line => {
-    requiredFuel += calculateRequiredFuel(line);
-    requiredFuelRecursive += calculateRequiredFuelRecursive(line);
-  })
-  .on("close", () => {
-    console.log(`Required fuel: ${requiredFuel}`);
-    console.log(`Required fuel recursive: ${requiredFuelRecursive}`);
-  });
+  console.log(
+    `Required fuel recursive: ${fuelForMassesRecursive(
+      input.trim().split("\n")
+    )}`
+  );
+});
